@@ -58,6 +58,7 @@ void AppWindow::onUpdate()
 	//set default shader in the graphics pipeline to be able to draw
 	GraphicsEngine::get()->setShaders();
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexShader(m_vs);
+
 	//set the vertices of the triangle to draw
 	GraphicsEngine::get()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
 
