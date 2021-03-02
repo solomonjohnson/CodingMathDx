@@ -75,5 +75,5 @@ void AppWindow::onDestroy()
 
 AppWindow::~AppWindow()
 {
-
+	dfdf
 }
