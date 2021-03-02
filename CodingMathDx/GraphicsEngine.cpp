@@ -5,9 +5,6 @@
 #include <d3dcompiler.h>
 #include "VertexShader.h"
 
-GraphicsEngine::GraphicsEngine()
-{
-}
 
 bool GraphicsEngine::init()
 {

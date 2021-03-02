@@ -1,6 +1,9 @@
 #include "VertexShader.h"
 #include "GraphicsEngine.h"
 
+#include <d3dcompiler.h>
+
+
 void VertexShader::release()
 {
 	m_vs->Release();
