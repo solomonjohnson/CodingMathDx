@@ -8,8 +8,6 @@
 class AppWindow : public Window 
 {
 public:
-	AppWindow();
-
 	// Inherited via Window
 	virtual void onCreate() override;
 	virtual void onUpdate() override;

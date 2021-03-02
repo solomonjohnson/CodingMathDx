@@ -10,9 +10,6 @@ struct vertex
 	vec3 position;
 };
 
-AppWindow::AppWindow()
-{
-}
 
 void AppWindow::onCreate()
 {
