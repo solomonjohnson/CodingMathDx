@@ -38,6 +38,7 @@ void AppWindow::onCreate()
 
 	void* shader_byte_code = nullptr;
 	UINT size_shader = 0;
+
 	GraphicsEngine::get()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = GraphicsEngine::get()->createVertexShader(shader_byte_code, size_shader);
 	m_vb->load(list, sizeof(vertex), size_list, shader_byte_code, size_shader);
