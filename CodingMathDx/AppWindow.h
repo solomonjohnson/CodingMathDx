@@ -13,8 +13,6 @@ public:
 	virtual void onUpdate() override;
 	virtual void onDestroy() override;
 
-	~AppWindow();
-
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;

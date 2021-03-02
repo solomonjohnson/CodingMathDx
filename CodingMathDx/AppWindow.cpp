@@ -72,8 +72,3 @@ void AppWindow::onDestroy()
 	m_swap_chain->release();
 	GraphicsEngine::get()->release();
 }
-
-AppWindow::~AppWindow()
-{
-	dfdf
-}
