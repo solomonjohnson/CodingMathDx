@@ -10,12 +10,10 @@ class VertexShader;
 class GraphicsEngine
 {
 public:
-	GraphicsEngine();
 	//Initialize the Graphics Engine and Directx11 Device
 	bool init();
 	//Release all the resources loaded
 	bool release();
-	~GraphicsEngine();
 public:
 	bool compileVertexShader(const wchar_t* file_name, const char* entry_point_name, void** shader_byte_code, size_t* byte_code_size);
 	void releaseCompiledShader();

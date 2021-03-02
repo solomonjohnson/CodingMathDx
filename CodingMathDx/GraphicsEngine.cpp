@@ -2,9 +2,9 @@
 #include"SwapChain.h"	
 #include"DeviceContext.h"
 #include"VertexBuffer.h"	
-#include <d3dcompiler.h>
 #include "VertexShader.h"
 
+#include <d3dcompiler.h>
 
 bool GraphicsEngine::init()
 {
@@ -67,10 +67,6 @@ bool GraphicsEngine::release()
 	m_imm_device_context->release();
 	m_d3d_device->Release();
 	return true;
-}
-
-GraphicsEngine::~GraphicsEngine()
-{
 }
 
 bool GraphicsEngine::compileVertexShader(const wchar_t* file_name, const char* entry_point_name,void** shader_byte_code,size_t* byte_code_size)
