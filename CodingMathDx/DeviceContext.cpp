@@ -34,7 +34,7 @@ void DeviceContext::drawTriangleStrip(UINT vertex_count, UINT start_vertex_index
 	m_device_context->Draw(vertex_count, start_vertex_index);
 }
 
-void DeviceContext::setViewPortSize(UINT width, UINT height)
+void DeviceContext::setViewportSize(UINT width, UINT height)
 {
 	D3D11_VIEWPORT vp = {};
 	vp.Width = (FLOAT)width;
@@ -48,6 +48,7 @@ void DeviceContext::setVertexShader(VertexShader* vertex_shader)
 {
 	m_device_context->VSSetShader(vertex_shader->m_vs, nullptr, 0);
 }
+
 
 bool DeviceContext::release()
 {
