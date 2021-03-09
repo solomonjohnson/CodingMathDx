@@ -1,10 +1,6 @@
 #include "VertexBuffer.h"
 #include"GraphicsEngine.h"  
 
-VertexBuffer::VertexBuffer() :m_layout(0), m_buffer(0)
-{
-}
-
 bool VertexBuffer::load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader)
 {
 	if (m_buffer)m_buffer->Release();
