@@ -1,12 +1,14 @@
-#pragma once
-#include<d3d11.h>
 
-class VertexBuffer;
+#pragma once
+#include <d3d11.h>
+
+class DeviceContext;
 
 class VertexBuffer
 {
 public:
-	bool load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, UINT size_byte_shader);
+	VertexBuffer();
+	bool load(void* list_vertices, UINT size_vertex, UINT size_list, void* shader_byte_code, size_t size_byte_shader);
 	UINT getSizeVertexList();
 	bool release();
 private:
@@ -18,4 +20,3 @@ private:
 private:
 	friend class DeviceContext;
 };
-
