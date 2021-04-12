@@ -7,13 +7,16 @@ class GraphicsEngine
 {
 public:
 	//Initialize the Graphics Engine and Directx11 Device
-	bool init();
+	GraphicsEngine();
 	//Release all the resources loaded
-	bool release();
+	~GraphicsEngine();
 	RenderSystem* getRenderSystem();
 public:
 	static GraphicsEngine* get();
+	static void create();
+	static void release();
 private:
 	RenderSystem* m_render_system = nullptr;
+	static GraphicsEngine* m_engine;
 };
 

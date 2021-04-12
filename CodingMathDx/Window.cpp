@@ -1,5 +1,5 @@
 #include "Window.h"
-
+#include <exception>
 //Window* window = nullptr;
 
 
@@ -9,11 +9,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	{
 	case WM_CREATE:
 	{
-		//Event fired when the window will be created 
-		Window* window = (Window*)((LPCREATESTRUCT)lparam)->lpCreateParams;
-		SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)window);
-		window->setHWND(hwnd);
-		window->onCreate();
 		break;
 	}
 
@@ -21,8 +16,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	{
 		//Event called when the window get focus
 		Window* window = (Window*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-
-		window->onFocus();
+		if(window) window->onFocus();
 		break;
 	}
 
@@ -53,10 +47,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 Window::Window()
 {
-}
-
-bool Window::init()
-{
 	WNDCLASSEX wc;
 	wc.cbClsExtra = NULL;
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -72,18 +62,18 @@ bool Window::init()
 	wc.lpfnWndProc = &WndProc;
 
 	if (!::RegisterClassEx(&wc)) //if the registration of class will fail, the function will return false
-		return false;
+		throw std::exception("Window not created successfully");
 
 	//if (!window)
 	//	window = this;
 
 	//Creation of window
 	m_hwnd = ::CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, "MyWindowClass", "DirectX Application", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 1024, 768,
-		NULL, NULL, NULL, this);
+		NULL, NULL, NULL, NULL);
 
 	//if the creation fails retun false
 	if (!m_hwnd)
-		return false;
+		throw std::exception("Window not created successfully");
 
 	//Show up the window
 	::ShowWindow(m_hwnd, SW_SHOW);
@@ -93,13 +83,19 @@ bool Window::init()
 
 	//set this flag to true to indicate that the window is initialized and running;
 	m_is_run = true;
-
-	return true;
 }
 
 bool Window::broadcast()
 {
 	MSG msg;
+
+	if (!this->m_is_init)
+	{
+		SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR)this);
+		this->onCreate();
+		this->m_is_init = true;
+	}
+
 	this->onUpdate();
 	while (::PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) > 0)
 	{
@@ -113,16 +109,10 @@ bool Window::broadcast()
 	return true;
 }
 
-bool Window::release()
-{
-	if (!::DestroyWindow(m_hwnd))
-		return false;
-
-	return true;
-}
-
 bool Window::isRun()
 {
+	if (m_is_run)
+		broadcast();
 	return m_is_run;
 }
 
@@ -131,11 +121,6 @@ RECT Window::getClientWindowRect()
 	RECT rc;
 	::GetClientRect(this->m_hwnd, &rc);
 	return rc;
-}
-
-void Window::setHWND(HWND hwnd)
-{
-	this->m_hwnd = hwnd;
 }
 
 void Window::onCreate()
